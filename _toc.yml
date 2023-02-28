@@ -1,0 +1,14 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: docs/index
+chapters:
+- file: docs/ds_toolkit
+- file: docs/data_analysis
+- file: docs/data_visualization
+- file: docs/ml_intro
+- file: docs/ml_model_selection
+- file: docs/ml_gradient_descent
+- file: docs/ml_non_parametric
+- file: docs/neural_networks
