@@ -4,12 +4,37 @@
 title: GMU CASBBI NRT Data Science
 author: Alonso G. Ogueda-Oliva
 logo: images/GMU_PLogo_4CP.png
-exclude_patterns: ["README.md"]
+exclude_patterns: [_build, "README.md", "**.ipynb_checkpoints"]
+only_build_toc_files: true
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
   execute_notebooks: auto
+
+parse:
+  myst_enable_extensions:  # default extensions to enable in the myst parser. See https://myst-parser.readthedocs.io/en/latest/using/syntax-optional.html
+    # - amsmath
+    - colon_fence
+    # - deflist
+    - dollarmath
+    # - html_admonition
+    # - html_image
+    - linkify
+    # - replacements
+    # - smartquotes
+    - substitution
+    - tasklist
+  myst_url_schemes: [mailto, http, https] # URI schemes that will be recognised as external URLs in Markdown links
+  myst_dmath_double_inline: true  # Allow display math ($$) within an inline context
+
+# Add GitHub buttons to your book
+# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
+html:
+  favicon: "images/favicon.ico"
+  use_issues_button: true
+  use_repository_button: true
+
 
 # Define the name of the latex output file for PDF builds
 latex:
@@ -20,18 +45,11 @@ latex:
 bibtex_bibfiles:
   - references.bib
 
+launch_buttons:
+  colab_url: "https://colab.research.google.com"
+
 # Information about where the book exists on the web
 repository:
   url: https://github.com/aoguedao/gmu-casbbi-nrt  # Online location of your book
   path_to_book: docs  # Optional path to your book, relative to the repository root
   branch: main  # Which branch of the repository should be used when creating links (optional)
-
-# Add GitHub buttons to your book
-# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
-html:
-  favicon: "images/favicon.ico"
-  use_issues_button: true
-  use_repository_button: true
-
-launch_buttons:
-  colab_url: "https://colab.research.google.com"
