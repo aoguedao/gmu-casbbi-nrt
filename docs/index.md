@@ -1,6 +1,6 @@
 # GMU CASBBI NRT Data Science
 
-Authors: [Alonso G. Ogueda Oliva](https://aoguedao.github.io/).
+Author: [Alonso G. Ogueda-Oliva](https://aoguedao.github.io/).
 
 
 You can [view this text online][ghpages] or [view the source][source].
