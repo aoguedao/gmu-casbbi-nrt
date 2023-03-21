@@ -3,14 +3,18 @@
 
 format: jb-book
 root: docs/index
-chapters:
-- file: docs/ds_toolkit
-  sections:
-    - file: docs/ds_toolkit_python
-- file: docs/data_analysis
-- file: docs/data_visualization
-- file: docs/ml_intro
-- file: docs/ml_model_selection
-- file: docs/ml_gradient_descent
-- file: docs/ml_non_parametric
-- file: docs/data_ethics
+parts:
+  - caption: Lessons
+    chapters:
+    - file: docs/ds_toolkit
+    - file: docs/python_101
+    - file: docs/data_analysis
+    - file: docs/data_visualization
+    - file: docs/ml_intro
+    - file: docs/ml_model_selection
+    - file: docs/ml_gradient_descent
+    - file: docs/ml_non_parametric
+    - file: docs/data_ethics
+  - caption: Activities
+    chapters:
+    - file: activities/01_github
