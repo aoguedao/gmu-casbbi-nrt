@@ -17,4 +17,5 @@ parts:
     - file: docs/data_ethics
   - caption: Activities
     chapters:
-    - file: activities/01_github
+    - file: labs/lab_ds_toolkit
+    - file: labs/lab_python_101
