@@ -398,10 +398,8 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-breast-cancer-wisconsin">Dataset: Breast Cancer Wisconsin</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#series">Series</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframes">DataFrames</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframes">DataFrames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-and-next-steps">Summary and next steps</a></li>
 </ul>
             </nav>
         </div>
@@ -415,7 +413,8 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="data-analysis">
 <h1>Data Analysis<a class="headerlink" href="#data-analysis" title="Permalink to this headline">#</a></h1>
-<p>The main goal of this class is to introduce you some data analysis common tasks using the <code class="docutils literal notranslate"><span class="pre">pandas</span></code> package.</p>
+<p>The main goal of this class is to learn how to gather, explore, clean and analyze different types of datasets.</p>
+<p>We will introduce some data analysis common tasks using the <code class="docutils literal notranslate"><span class="pre">pandas</span></code> package.</p>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">pandas</span></code> is a fast, powerful, flexible and easy to use open source data analysis and manipulation tool, built on top of the Python programming language.</p>
 <p>–<cite> <a class="reference external" href="https://pandas.pydata.org">https://pandas.pydata.org</a> </cite>–</p>
@@ -1010,7 +1009,7 @@ dtype: object
 <p>Since we already loaded the breast cancer data we will use it as an example. Each list of this file has been converted to a <code class="docutils literal notranslate"><span class="pre">pd.Series</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clump_thick_series</span> <span class="o">=</span> <span class="n">breast_cancer_data</span><span class="p">[</span><span class="s2">&quot;clump_thickness&quot;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clump_thick_series</span> <span class="o">=</span> <span class="n">breast_cancer_data</span><span class="p">[</span><span class="s2">&quot;clump_thickness&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">clump_thick_series</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1188,7 +1187,7 @@ Name: clump_thickness, dtype: int64
 </div>
 </div>
 <p>You can even edit or add values with these methods.</p>
-<p>For instance, what if the dataset is wrong about patient <code class="docutils literal notranslate"><span class="pre">1166654</span></code> and clump thickness should have been <code class="docutils literal notranslate"><span class="pre">4</span></code> instead of <code class="docutils literal notranslate"><span class="pre">5</span></code>?</p>
+<p>For instance, what if the dataset is wrong about patient <code class="docutils literal notranslate"><span class="pre">1166654</span></code> and clump thickness should have been <code class="docutils literal notranslate"><span class="pre">6</span></code> instead of <code class="docutils literal notranslate"><span class="pre">10</span></code>?</p>
 <p>We can fix that easily.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1196,17 +1195,12 @@ Name: clump_thickness, dtype: int64
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_675/3676705063.py:1: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  clump_thick_series.loc[1166654] = 6
-</pre></div>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You should have got a <code class="docutils literal notranslate"><span class="pre">SettingWithCopyWarning</span></code> message after running the last code cell if we had not used the <code class="docutils literal notranslate"><span class="pre">copy()</span></code> method.</p>
+<p>I would suggest you to read <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy">this link</a> if you get that warning. But in simple words, <code class="docutils literal notranslate"><span class="pre">loc</span></code> returns a <strong>view</strong>, that means if you change anything it will change the main object itself. This is a feature, not an error. We have to be careful with this in the future.</p>
 </div>
-</div>
-<p>Youe may got a <code class="docutils literal notranslate"><span class="pre">SettingWithCopyWarning</span></code> message after running the last code cell. I would suggest you to read the link cited after that warning. But in simple words, <code class="docutils literal notranslate"><span class="pre">loc</span></code> returns a <strong>view</strong>, that means if you change anything it will change the main object itself. This is a feature, not an error. We have to be careful with this in the future.</p>
 <p>Ok, let’s check that change we made</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1219,6 +1213,34 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </pre></div>
 </div>
 </div>
+</div>
+<p>Howerver, notice since we copied the column this didn’t change the value in the original dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">breast_cancer_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1166654</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>clump_thickness                10
+uniformity_cell_size            3
+uniformity_cell_shape           5
+marginal_adhesion               1
+single_epithelial_cell_size    10
+bare_nuclei                     5
+bland_chromatin                 3
+normal_cucleoli                10
+mitoses                         2
+class                           4
+Name: 1166654, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>You can try to create <code class="docutils literal notranslate"><span class="pre">clump_thick_series</span></code> without the <code class="docutils literal notranslate"><span class="pre">.copy()</span></code> method and explore what happens if you change values.</p>
+<p>I would suggest you <strong>to use copies if you are not sure</strong>.</p>
 </div>
 <p>Another common mask is when you want to filter by a condition.</p>
 <p>For example, let’s get all the patients with a clump thickness greater than 7.</p>
@@ -1619,11 +1641,11 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_675/3888804924.py:1: FutureWarning: The default value of numeric_only in DataFrame.mean is deprecated. In a future version, it will default to False. In addition, specifying &#39;numeric_only=None&#39; is deprecated. Select only valid columns or specify the value of numeric_only to silence this warning.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_16492/3888804924.py:1: FutureWarning: The default value of numeric_only in DataFrame.mean is deprecated. In a future version, it will default to False. In addition, specifying &#39;numeric_only=None&#39; is deprecated. Select only valid columns or specify the value of numeric_only to silence this warning.
   breast_cancer_data.mean()
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>clump_thickness                4.412017
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>clump_thickness                4.417740
 uniformity_cell_size           3.134478
 uniformity_cell_shape          3.207439
 marginal_adhesion              2.806867
@@ -1645,7 +1667,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>clump_thickness                 6
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>clump_thickness                10
 uniformity_cell_size            3
 uniformity_cell_shape           5
 marginal_adhesion               1
@@ -1660,7 +1682,7 @@ Name: 1166654, dtype: object
 </div>
 </div>
 </div>
-<p>However, you don’t need to do a double <code class="docutils literal notranslate"><span class="pre">loc</span></code>.</p>
+<p>However, you shouldn’t use a double <code class="docutils literal notranslate"><span class="pre">loc</span></code>. Technical reason <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#why-does-assignment-fail-when-using-chained-indexing">here</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">breast_cancer_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1166654</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;clump_thickness&quot;</span><span class="p">]</span>
@@ -1668,7 +1690,7 @@ Name: 1166654, dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
 </pre></div>
 </div>
 </div>
@@ -1681,7 +1703,7 @@ Name: 1166654, dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
 </pre></div>
 </div>
 </div>
@@ -1693,8 +1715,8 @@ Name: 1166654, dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>clump_thickness    6
-class              4
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>clump_thickness    10
+class               4
 Name: 1166654, dtype: object
 </pre></div>
 </div>
@@ -1737,7 +1759,7 @@ Name: 1166654, dtype: object
   <tbody>
     <tr>
       <th>1166654</th>
-      <td>6</td>
+      <td>10</td>
       <td>4</td>
     </tr>
     <tr>
@@ -1946,7 +1968,7 @@ Name: 1166654, dtype: object
     </tr>
   </tbody>
 </table>
-<p>128 rows × 10 columns</p>
+<p>129 rows × 10 columns</p>
 </div></div></div>
 </div>
 <p>Or getting a specific column</p>
@@ -2296,6 +2318,11 @@ Name: bare_nuclei, dtype: int64
 </div>
 </div>
 </div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Same result but way more elegant is achieved with the following code line <code class="docutils literal notranslate"><span class="pre">breast_cancer_data.replace({'bare_nuclei':</span> <span class="pre">{&quot;?&quot;:</span> <span class="pre">pd.NA}})</span></code></p>
+</div>
+<p>Let’s see the rows with null values</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">breast_cancer_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;bare_nuclei&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">pd</span><span class="o">.</span><span class="n">NA</span><span class="p">]</span>
@@ -2351,7 +2378,7 @@ Name: bare_nuclei, dtype: int64
 </table>
 </div></div></div>
 </div>
-<p>Wait a second, why is it not showing me the null values?</p>
+<p>Wait a second, why is it not showing me the null values? Null values have weird behaviors in Python.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">NA</span> <span class="o">==</span> <span class="n">pd</span><span class="o">.</span><span class="n">NA</span>
@@ -2363,6 +2390,10 @@ Name: bare_nuclei, dtype: int64
 </pre></div>
 </div>
 </div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><code class="docutils literal notranslate"><span class="pre">pandas</span></code> will recognize <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">np.na</span></code> and <code class="docutils literal notranslate"><span class="pre">pd.NA</span></code> as null values, be careful!</p>
 </div>
 <p>There are special methods for working with null values</p>
 <div class="cell docutils container">
@@ -2628,205 +2659,7 @@ Name: bare_nuclei, dtype: int64
 </table>
 </div></div></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">breast_cancer_data</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>clump_thickness</th>
-      <th>uniformity_cell_size</th>
-      <th>uniformity_cell_shape</th>
-      <th>marginal_adhesion</th>
-      <th>single_epithelial_cell_size</th>
-      <th>bare_nuclei</th>
-      <th>bland_chromatin</th>
-      <th>normal_cucleoli</th>
-      <th>mitoses</th>
-      <th>class</th>
-    </tr>
-    <tr>
-      <th>code</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1000025</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>1002945</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>1015425</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>1016277</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>1017023</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>776715</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>841769</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>888820</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>897471</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>897471</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-  </tbody>
-</table>
-<p>699 rows × 10 columns</p>
-</div></div></div>
-</div>
+<p>Or you can explore for any column if there is any null value</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">breast_cancer_data</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
@@ -2849,6 +2682,7 @@ dtype: bool
 </div>
 </div>
 </div>
+<p>Or maybe for rows using <code class="docutils literal notranslate"><span class="pre">axis=1</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">breast_cancer_data</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -2873,13 +2707,102 @@ Length: 699, dtype: bool
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<p>Ok, now we will fix the <code class="docutils literal notranslate"><span class="pre">bare_nuclei</span></code> column. Imagine you want to replace the null values with the mean value.</p>
+<div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>breast_cancer_data.fillna<span class="o">?</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">breast_cancer_data</span><span class="p">[</span><span class="s1">&#39;bare_nuclei&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">46</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">breast_cancer_data</span><span class="p">[</span><span class="s1">&#39;bare_nuclei&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="nn">File ~/mambaforge/envs/casbbi-nrt-ds/lib/python3.11/site-packages/pandas/core/generic.py:11847,</span> in <span class="ni">NDFrame._add_numeric_operations.&lt;locals&gt;.mean</span><span class="nt">(self, axis, skipna, level, numeric_only, **kwargs)</span>
+<span class="g g-Whitespace">  </span><span class="mi">11829</span> <span class="nd">@doc</span><span class="p">(</span>
+<span class="g g-Whitespace">  </span><span class="mi">11830</span>     <span class="n">_num_doc</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">11831</span>     <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Return the mean of the values over the requested axis.&quot;</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">  </span><span class="mi">11845</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">11846</span> <span class="p">):</span>
+<span class="ne">&gt; </span><span class="mi">11847</span>     <span class="k">return</span> <span class="n">NDFrame</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">numeric_only</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/mambaforge/envs/casbbi-nrt-ds/lib/python3.11/site-packages/pandas/core/generic.py:11401,</span> in <span class="ni">NDFrame.mean</span><span class="nt">(self, axis, skipna, level, numeric_only, **kwargs)</span>
+<span class="g g-Whitespace">  </span><span class="mi">11393</span> <span class="k">def</span> <span class="nf">mean</span><span class="p">(</span>
+<span class="g g-Whitespace">  </span><span class="mi">11394</span>     <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">11395</span>     <span class="n">axis</span><span class="p">:</span> <span class="n">Axis</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">lib</span><span class="o">.</span><span class="n">NoDefault</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">no_default</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">  </span><span class="mi">11399</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">11400</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Series</span> <span class="o">|</span> <span class="nb">float</span><span class="p">:</span>
+<span class="ne">&gt; </span><span class="mi">11401</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stat_function</span><span class="p">(</span>
+<span class="g g-Whitespace">  </span><span class="mi">11402</span>         <span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="n">nanops</span><span class="o">.</span><span class="n">nanmean</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">numeric_only</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+<span class="g g-Whitespace">  </span><span class="mi">11403</span>     <span class="p">)</span>
+
+<span class="nn">File ~/mambaforge/envs/casbbi-nrt-ds/lib/python3.11/site-packages/pandas/core/generic.py:11353,</span> in <span class="ni">NDFrame._stat_function</span><span class="nt">(self, name, func, axis, skipna, level, numeric_only, **kwargs)</span>
+<span class="g g-Whitespace">  </span><span class="mi">11343</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+<span class="g g-Whitespace">  </span><span class="mi">11344</span>         <span class="s2">&quot;Using the level keyword in DataFrame and Series aggregations is &quot;</span>
+<span class="g g-Whitespace">  </span><span class="mi">11345</span>         <span class="s2">&quot;deprecated and will be removed in a future version. Use groupby &quot;</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">  </span><span class="mi">11348</span>         <span class="n">stacklevel</span><span class="o">=</span><span class="n">find_stack_level</span><span class="p">(),</span>
+<span class="g g-Whitespace">  </span><span class="mi">11349</span>     <span class="p">)</span>
+<span class="g g-Whitespace">  </span><span class="mi">11350</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_agg_by_level</span><span class="p">(</span>
+<span class="g g-Whitespace">  </span><span class="mi">11351</span>         <span class="n">name</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="n">numeric_only</span><span class="o">=</span><span class="n">numeric_only</span>
+<span class="g g-Whitespace">  </span><span class="mi">11352</span>     <span class="p">)</span>
+<span class="ne">&gt; </span><span class="mi">11353</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reduce</span><span class="p">(</span>
+<span class="g g-Whitespace">  </span><span class="mi">11354</span>     <span class="n">func</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="n">numeric_only</span><span class="o">=</span><span class="n">numeric_only</span>
+<span class="g g-Whitespace">  </span><span class="mi">11355</span> <span class="p">)</span>
+
+<span class="nn">File ~/mambaforge/envs/casbbi-nrt-ds/lib/python3.11/site-packages/pandas/core/series.py:4816,</span> in <span class="ni">Series._reduce</span><span class="nt">(self, op, name, axis, skipna, numeric_only, filter_type, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4812</span>     <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">4813</span>         <span class="sa">f</span><span class="s2">&quot;Series.</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> does not implement </span><span class="si">{</span><span class="n">kwd_name</span><span class="si">}</span><span class="s2">.&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">4814</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4815</span> <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">4816</span>     <span class="k">return</span> <span class="n">op</span><span class="p">(</span><span class="n">delegate</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+
+<span class="nn">File ~/mambaforge/envs/casbbi-nrt-ds/lib/python3.11/site-packages/pandas/core/nanops.py:93,</span> in <span class="ni">disallow.__call__.&lt;locals&gt;._f</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">91</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">92</span>     <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">93</span>         <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span> <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="c1"># we want to transform an object array</span>
+<span class="g g-Whitespace">     </span><span class="mi">96</span>     <span class="c1"># ValueError message to the more typical TypeError</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>     <span class="c1"># e.g. this is normally a disallowed function on</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span>     <span class="c1"># object arrays that contain strings</span>
+<span class="g g-Whitespace">     </span><span class="mi">99</span>     <span class="k">if</span> <span class="n">is_object_dtype</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+
+<span class="nn">File ~/mambaforge/envs/casbbi-nrt-ds/lib/python3.11/site-packages/pandas/core/nanops.py:155,</span> in <span class="ni">bottleneck_switch.__call__.&lt;locals&gt;.f</span><span class="nt">(values, axis, skipna, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">153</span>         <span class="n">result</span> <span class="o">=</span> <span class="n">alt</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">154</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">155</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">alt</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">157</span> <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">File ~/mambaforge/envs/casbbi-nrt-ds/lib/python3.11/site-packages/pandas/core/nanops.py:418,</span> in <span class="ni">_datetimelike_compat.&lt;locals&gt;.new_func</span><span class="nt">(values, axis, skipna, mask, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">415</span> <span class="k">if</span> <span class="n">datetimelike</span> <span class="ow">and</span> <span class="n">mask</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">416</span>     <span class="n">mask</span> <span class="o">=</span> <span class="n">isna</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">418</span> <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">420</span> <span class="k">if</span> <span class="n">datetimelike</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">421</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">_wrap_results</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">orig_values</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="n">iNaT</span><span class="p">)</span>
+
+<span class="nn">File ~/mambaforge/envs/casbbi-nrt-ds/lib/python3.11/site-packages/pandas/core/nanops.py:706,</span> in <span class="ni">nanmean</span><span class="nt">(values, axis, skipna, mask)</span>
+<span class="g g-Whitespace">    </span><span class="mi">703</span>     <span class="n">dtype_count</span> <span class="o">=</span> <span class="n">dtype</span>
+<span class="g g-Whitespace">    </span><span class="mi">705</span> <span class="n">count</span> <span class="o">=</span> <span class="n">_get_counts</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype_count</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">706</span> <span class="n">the_sum</span> <span class="o">=</span> <span class="n">_ensure_numeric</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype_sum</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">708</span> <span class="k">if</span> <span class="n">axis</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">the_sum</span><span class="p">,</span> <span class="s2">&quot;ndim&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">709</span>     <span class="n">count</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+
+<span class="nn">File ~/mambaforge/envs/casbbi-nrt-ds/lib/python3.11/site-packages/numpy/core/_methods.py:49,</span> in <span class="ni">_sum</span><span class="nt">(a, axis, dtype, out, keepdims, initial, where)</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span> <span class="k">def</span> <span class="nf">_sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">48</span>          <span class="n">initial</span><span class="o">=</span><span class="n">_NoValue</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">49</span>     <span class="k">return</span> <span class="n">umr_sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">keepdims</span><span class="p">,</span> <span class="n">initial</span><span class="p">,</span> <span class="n">where</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: can only concatenate str (not &quot;int&quot;) to str
 </pre></div>
 </div>
 </div>
 </div>
+<p>Oh no! We need to convert that column to a numeric column</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">breast_cancer_data</span><span class="p">[</span><span class="s1">&#39;bare_nuclei&#39;</span><span class="p">])</span>
@@ -2911,18 +2834,17 @@ Name: bare_nuclei, Length: 699, dtype: float64
 </div>
 </div>
 </div>
+<p>Other option could have been</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">breast_cancer_data</span><span class="p">[</span><span class="s1">&#39;bare_nuclei&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">breast_cancer_data</span> <span class="o">=</span> <span class="n">breast_cancer_data</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span>
+    <span class="n">bare_nuclei</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;bare_nuclei&#39;</span><span class="p">])</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
-</pre></div>
 </div>
-</div>
-</div>
+<p>I like this last one better, but don’t worry!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">breast_cancer_data</span><span class="p">[</span><span class="s1">&#39;bare_nuclei&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -2935,6 +2857,8 @@ Name: bare_nuclei, Length: 699, dtype: float64
 </div>
 </div>
 </div>
+<p>Now, every value is a integer, so we should convert this value to a integer, you should ask to the experts what makes more sense. Let’s say it is better to approximate this value to the a bigger integer.</p>
+<p>There is a scientific computing package called <code class="docutils literal notranslate"><span class="pre">numpy</span></code> that we don’t have time to cover but you should check it out.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -2951,6 +2875,15 @@ Name: bare_nuclei, Length: 699, dtype: float64
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, as an example, let’s think we want to fill those null values with the mean value of the column.</p>
+<p>If you are wondering if there is any method for this the answer is yes!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pd.DataFrame.fillna<span class="o">?</span>
 </pre></div>
 </div>
 </div>
@@ -3176,7 +3109,11 @@ dtype: bool
 </div>
 </div>
 </div>
-<p>What?</p>
+<p>What? There still null values. That is because most of <code class="docutils literal notranslate"><span class="pre">pandas</span></code> functions return a copy of the DataFrame. You have to options</p>
+<ul class="simple">
+<li><p>To assign the result to the same variable.</p></li>
+<li><p>If the method allows it, you can use <code class="docutils literal notranslate"><span class="pre">inplace=True</span></code>.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">breast_cancer_data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;bare_nuclei&#39;</span><span class="p">:</span> <span class="n">bare_nuclei_mean</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -3206,22 +3143,365 @@ dtype: bool
 </div>
 </div>
 </div>
+</section>
+<section id="summary-and-next-steps">
+<h2>Summary and next steps<a class="headerlink" href="#summary-and-next-steps" title="Permalink to this headline">#</a></h2>
+<p>In this session we explore a data set, reading it, understanding its elements and methods. Also we clean the dataset with null values.</p>
+<p>We didn’t have enough time but you should learn about merging datasets, aggreagation, etc.</p>
+<p>Just a few examples:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">breast_cancer_data</span> <span class="o">=</span> <span class="n">breast_cancer_data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;bare_nuclei&#39;</span><span class="p">:</span> <span class="n">bare_nuclei_mean</span><span class="p">})</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cancer_names</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;benign&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;malignant&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;unknown&quot;</span><span class="p">]],</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="s2">&quot;cancer&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">cancer_names</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>class</th>
+      <th>cancer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>benign</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>malignant</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>unknown</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">breast_cancer_data2</span> <span class="o">=</span> <span class="n">breast_cancer_data</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+    <span class="n">cancer_names</span><span class="p">,</span>
+    <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+    <span class="n">on</span><span class="o">=</span><span class="s2">&quot;class&quot;</span>
+<span class="p">)</span>
+<span class="n">breast_cancer_data2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>clump_thickness</th>
+      <th>uniformity_cell_size</th>
+      <th>uniformity_cell_shape</th>
+      <th>marginal_adhesion</th>
+      <th>single_epithelial_cell_size</th>
+      <th>bare_nuclei</th>
+      <th>bland_chromatin</th>
+      <th>normal_cucleoli</th>
+      <th>mitoses</th>
+      <th>class</th>
+      <th>cancer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1.0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>benign</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5</td>
+      <td>4</td>
+      <td>4</td>
+      <td>5</td>
+      <td>7</td>
+      <td>10.0</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>benign</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2.0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>benign</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>6</td>
+      <td>8</td>
+      <td>8</td>
+      <td>1</td>
+      <td>3</td>
+      <td>4.0</td>
+      <td>3</td>
+      <td>7</td>
+      <td>1</td>
+      <td>2</td>
+      <td>benign</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1.0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>benign</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>694</th>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>2.0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>benign</td>
+    </tr>
+    <tr>
+      <th>695</th>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1.0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>benign</td>
+    </tr>
+    <tr>
+      <th>696</th>
+      <td>5</td>
+      <td>10</td>
+      <td>10</td>
+      <td>3</td>
+      <td>7</td>
+      <td>3.0</td>
+      <td>8</td>
+      <td>10</td>
+      <td>2</td>
+      <td>4</td>
+      <td>malignant</td>
+    </tr>
+    <tr>
+      <th>697</th>
+      <td>4</td>
+      <td>8</td>
+      <td>6</td>
+      <td>4</td>
+      <td>3</td>
+      <td>4.0</td>
+      <td>10</td>
+      <td>6</td>
+      <td>1</td>
+      <td>4</td>
+      <td>malignant</td>
+    </tr>
+    <tr>
+      <th>698</th>
+      <td>4</td>
+      <td>8</td>
+      <td>8</td>
+      <td>5</td>
+      <td>4</td>
+      <td>5.0</td>
+      <td>10</td>
+      <td>4</td>
+      <td>1</td>
+      <td>4</td>
+      <td>malignant</td>
+    </tr>
+  </tbody>
+</table>
+<p>699 rows × 11 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">breast_cancer_data2</span><span class="p">[</span><span class="s2">&quot;cancer&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;benign&#39;, &#39;malignant&#39;], dtype=object)
 </pre></div>
 </div>
 </div>
 </div>
-<section id="summary">
-<h3>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>Data set exploration</p></li>
-<li><p>Pandas Series</p></li>
-<li><p>Pandas DataFrames</p></li>
-<li><p>Missing Values</p></li>
-</ul>
-</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">breast_cancer_data2</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;cancer&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>cancer</th>
+      <th>benign</th>
+      <th>malignant</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>clump_thickness</th>
+      <td>2.956332</td>
+      <td>7.195021</td>
+    </tr>
+    <tr>
+      <th>uniformity_cell_size</th>
+      <td>1.325328</td>
+      <td>6.572614</td>
+    </tr>
+    <tr>
+      <th>uniformity_cell_shape</th>
+      <td>1.443231</td>
+      <td>6.560166</td>
+    </tr>
+    <tr>
+      <th>marginal_adhesion</th>
+      <td>1.364629</td>
+      <td>5.547718</td>
+    </tr>
+    <tr>
+      <th>single_epithelial_cell_size</th>
+      <td>2.120087</td>
+      <td>5.298755</td>
+    </tr>
+    <tr>
+      <th>bare_nuclei</th>
+      <td>1.427948</td>
+      <td>7.597510</td>
+    </tr>
+    <tr>
+      <th>bland_chromatin</th>
+      <td>2.100437</td>
+      <td>5.979253</td>
+    </tr>
+    <tr>
+      <th>normal_cucleoli</th>
+      <td>1.290393</td>
+      <td>5.863071</td>
+    </tr>
+    <tr>
+      <th>mitoses</th>
+      <td>1.063319</td>
+      <td>2.589212</td>
+    </tr>
+    <tr>
+      <th>class</th>
+      <td>2.000000</td>
+      <td>4.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>A very good place to learn is in the official <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/index.html">user guide</a>.</p>
 </section>
 </section>
 
@@ -3288,10 +3568,8 @@ dtype: bool
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-breast-cancer-wisconsin">Dataset: Breast Cancer Wisconsin</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#series">Series</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframes">DataFrames</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframes">DataFrames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-and-next-steps">Summary and next steps</a></li>
 </ul>
   </nav></div>
 
