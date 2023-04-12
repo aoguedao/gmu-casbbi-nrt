@@ -19,3 +19,4 @@ parts:
     chapters:
     - file: labs/lab_ds_toolkit
     - file: labs/lab_python_101
+    - file: labs/lab_data_analysis
