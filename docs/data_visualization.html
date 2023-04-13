@@ -60,6 +60,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/data_visualization';</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -399,8 +401,21 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-plots">Why plots?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theory">Theory</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib">Matplotlib</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seaborn">Seaborn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib">Matplotlib</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot">Scatter Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#line-plot">Line Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bar-plot">Bar plot</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seaborn">Seaborn</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Scatter Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Line Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Bar Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram">Histogram</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#box-plot">Box Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heat-map">Heat Map</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -414,17 +429,13 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="data-visualization">
 <h1>Data Visualization<a class="headerlink" href="#data-visualization" title="Permalink to this headline">#</a></h1>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Not yet released</p>
-</div>
+<p>The objectives for this lesson are to interprete basics of visualization theory and apply it on different datasets using python libraries.</p>
 <section id="why-plots">
 <h2>Why plots?<a class="headerlink" href="#why-plots" title="Permalink to this headline">#</a></h2>
-<p>The objectives for this lesson are to interprete basics of visualization theory and apply it on different datasets using python libraries.</p>
+<p><img alt="example4" src="../_images/male_height.jpg" /></p>
 <p><img alt="example1" src="../_images/Fox1.png" /></p>
 <p><img alt="example2" src="../_images/Fox2.png" /></p>
 <p><img alt="example3" src="../_images/Fox3.png" /></p>
-<p><img alt="example4" src="../_images/male_height.jpg" /></p>
 <p><img alt="example5" src="../_images/pinera.jpg" /></p>
 <ul class="simple">
 <li><p>70% of the sensory receptors in the human body are dedicated to vision.</p></li>
@@ -437,13 +448,772 @@ document.write(`
 </section>
 <section id="theory">
 <h2>Theory<a class="headerlink" href="#theory" title="Permalink to this headline">#</a></h2>
+<p><strong>Human Visual System</strong></p>
+<ul class="simple">
+<li><p>Good news</p>
+<ul>
+<li><p>Graphs provide information that statistics might not.</p></li>
+<li><p>Visual display is essential for understanding.</p></li>
+</ul>
+</li>
+<li><p>Bad news</p>
+<ul>
+<li><p>Attention is selective and can easily be misled.</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="IO1a" src="../_images/IO1a.png" /></p>
+<p><img alt="IO1b" src="../_images/IO1b.png" /></p>
+<p><img alt="IO2a" src="../_images/IO2a.png" /></p>
+<p><img alt="IO2b" src="../_images/IO2b.png" /></p>
+<p><strong>Advice</strong></p>
+<p>Noah Illinsky, in his talk <a class="reference external" href="https://www.youtube.com/watch?v=3eZ15VplE3o">Four pillars of visualization</a>, presents good advice on how to perform a correct visualization:</p>
+<ul class="simple">
+<li><p>Purpose</p></li>
+<li><p>Information/Content</p></li>
+<li><p>Encoding/Structure</p></li>
+<li><p>Format</p></li>
+</ul>
+<p>This indicates that a visualization is not the result of some data. A visualization is designed, thought out, and then appropriate sources of information are sought.</p>
+<p><strong>Elements for creating a good visualization</strong></p>
+<ol class="arabic simple">
+<li><p><em><strong>Honesty</strong></em>: Visual representations must not mislead the viewer.</p></li>
+<li><p><em><strong>Prioritization</strong></em>: the most important data must use an element of better perception.</p></li>
+<li><p><em><strong>Expressiveness</strong></em>: data must use elements with appropriate attributions.</p></li>
+<li><p><em><strong>Consistency</strong></em>: visual coding must allow data to be reproduced.</p></li>
+</ol>
+<p>The basic principle to respect is that from the graph one must be able to easily interpret the original data.</p>
 </section>
 <section id="matplotlib">
 <h2>Matplotlib<a class="headerlink" href="#matplotlib" title="Permalink to this headline">#</a></h2>
+<p>Matplotlib is a comprehensive library for creating static, animated, and interactive visualizations in Python. Matplotlib makes easy things easy and hard things possible.</p>
+<ul class="simple">
+<li><p>Create publication quality plots.</p></li>
+<li><p>Make interactive figures that can zoom, pan, update.</p></li>
+<li><p>Customize visual style and layout.</p></li>
+<li><p>Export to many file formats.</p></li>
+<li><p>Embed in JupyterLab and Graphical User Interfaces.</p></li>
+<li><p>Use a rich array of third-party packages built on Matplotlib.</p></li>
+</ul>
+<p>Source: <a class="reference external" href="https://matplotlib.org/">https://matplotlib.org/</a></p>
+<p><img alt="matplotlib_anatomy" src="https://matplotlib.org/stable/_images/sphx_glr_anatomy_001.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will use the same Heart Disease dataset that we used in the last activity.</p>
+<p><a class="reference external" href="https://archive-beta.ics.uci.edu/dataset/45/heart+disease">https://archive-beta.ics.uci.edu/dataset/45/heart+disease</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">heart_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data&quot;</span><span class="p">,</span>
+    <span class="n">names</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;age&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;sex&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;cp&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;trestbps&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;chol&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fbs&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;restecg&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;thalach&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;exang&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;oldpeak&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;slope&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ca&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;thal&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;num&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+<span class="n">heart_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>sex</th>
+      <th>cp</th>
+      <th>trestbps</th>
+      <th>chol</th>
+      <th>fbs</th>
+      <th>restecg</th>
+      <th>thalach</th>
+      <th>exang</th>
+      <th>oldpeak</th>
+      <th>slope</th>
+      <th>ca</th>
+      <th>thal</th>
+      <th>num</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>63.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>145.0</td>
+      <td>233.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>150.0</td>
+      <td>0.0</td>
+      <td>2.3</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>6.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>67.0</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>160.0</td>
+      <td>286.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>108.0</td>
+      <td>1.0</td>
+      <td>1.5</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>3.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>67.0</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>120.0</td>
+      <td>229.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>129.0</td>
+      <td>1.0</td>
+      <td>2.6</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>7.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>37.0</td>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>130.0</td>
+      <td>250.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>187.0</td>
+      <td>0.0</td>
+      <td>3.5</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>41.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>130.0</td>
+      <td>204.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>172.0</td>
+      <td>0.0</td>
+      <td>1.4</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="scatter-plot">
+<h3>Scatter Plot<a class="headerlink" href="#scatter-plot" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">heart_df</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">heart_df</span><span class="p">[</span><span class="s2">&quot;chol&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">heart_df</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7fa965b057d0&gt;
+</pre></div>
+</div>
+<img alt="../_images/593798b3493b570f2793122eceeebdf60c3fa43ef00079f7eaaed5742f6303d8.png" src="../_images/593798b3493b570f2793122eceeebdf60c3fa43ef00079f7eaaed5742f6303d8.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7fa9659a4350&gt;
+</pre></div>
+</div>
+<img alt="../_images/c5ab51056765a394cd66aca1a80109dd861cf338e801d66b3f85aed95cecc0a7.png" src="../_images/c5ab51056765a394cd66aca1a80109dd861cf338e801d66b3f85aed95cecc0a7.png" />
+</div>
+</div>
+</section>
+<section id="line-plot">
+<h3>Line Plot<a class="headerlink" href="#line-plot" title="Permalink to this headline">#</a></h3>
+<p>Since we don’t have any ordered continuous data in this dataset let’s use synthetic data trying to plot the function</p>
+<div class="math notranslate nohighlight">
+\[
+f(t) = e^{-t} \cos(2 \pi t)
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="n">t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">t1</span><span class="p">),</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;arange step = 0.5&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;arange step = 0.5&#39;)
+</pre></div>
+</div>
+<img alt="../_images/c8aa4b62182177d5e0d53f45a815b4833e59b4557e3b44fa4e5e5a7c4d59dd93.png" src="../_images/c8aa4b62182177d5e0d53f45a815b4833e59b4557e3b44fa4e5e5a7c4d59dd93.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">t1</span><span class="p">),</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;f(t)&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;arange step = 0.5&quot;</span><span class="p">)</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">t2</span><span class="p">))</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;f(t)&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;arange step = 0.02&quot;</span><span class="p">)</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_741/2914122446.py:14: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+  fig.show()
+</pre></div>
+</div>
+<img alt="../_images/d3412b24e79ad07e3e428f59afe1ea2f5d12e23cdb1283b459b7451bf96dd548.png" src="../_images/d3412b24e79ad07e3e428f59afe1ea2f5d12e23cdb1283b459b7451bf96dd548.png" />
+</div>
+</div>
+</section>
+<section id="bar-plot">
+<h3>Bar plot<a class="headerlink" href="#bar-plot" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_age_per_chest_pain_type</span> <span class="o">=</span> <span class="n">heart_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;cp&quot;</span><span class="p">)[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">mean_age_per_chest_pain_type</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cp
+1.0    55.869565
+2.0    51.360000
+3.0    53.697674
+4.0    55.722222
+Name: age, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chest_pain_types_names</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;typical angina&quot;</span><span class="p">,</span> <span class="s2">&quot;atypical angina&quot;</span><span class="p">,</span> <span class="s2">&quot;non-anginal pain&quot;</span><span class="p">,</span> <span class="s2">&quot;asymptomatic&quot;</span><span class="p">)</span>
+<span class="n">chest_pain_types</span> <span class="o">=</span> <span class="n">mean_age_per_chest_pain_type</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span>
+<span class="n">mean_age</span> <span class="o">=</span> <span class="n">mean_age_per_chest_pain_type</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Another way of plotting without axes</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">chest_pain_types</span><span class="p">,</span> <span class="n">mean_age</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">chest_pain_types</span><span class="p">,</span> <span class="n">chest_pain_types_names</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean Age&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Chest Pain Type&#39;</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2ac10b2db46543feff1e05bb613960b9600e03bbe4a8fe36de1759c1427f02ac.png" src="../_images/2ac10b2db46543feff1e05bb613960b9600e03bbe4a8fe36de1759c1427f02ac.png" />
+</div>
+</div>
+<p>Matplotlib follows the philosophy of Imperative Visualization, you are in control of everything and you need to declare every single dot/bar/line/etc.</p>
+<p>The Examples Gallery of matplotlib will be your best friend: <a class="reference external" href="https://matplotlib.org/stable/gallery/index.html">https://matplotlib.org/stable/gallery/index.html</a></p>
+</section>
 </section>
 <section id="seaborn">
 <h2>Seaborn<a class="headerlink" href="#seaborn" title="Permalink to this headline">#</a></h2>
-<p>Maybe some jamboard, breakout rooms</p>
+<p>Seaborn is a Python data visualization library based on matplotlib. It provides a high-level interface for drawing attractive and informative statistical graphics.</p>
+<p>Source: <a class="reference external" href="https://seaborn.pydata.org/">https://seaborn.pydata.org/</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;darkgrid&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id1">
+<h3>Scatter Plot<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.5</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;chol&quot;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">heart_df</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;age&#39;, ylabel=&#39;chol&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/8a7a3759f680f97c9646cade4fafff0064d3304e3887a0aaca23490736a9aa68.png" src="../_images/8a7a3759f680f97c9646cade4fafff0064d3304e3887a0aaca23490736a9aa68.png" />
+</div>
+</div>
+</section>
+<section id="id2">
+<h3>Line Plot<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load an example dataset with long-form data</span>
+<span class="n">fmri</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;fmri&quot;</span><span class="p">)</span>
+<span class="n">fmri</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>subject</th>
+      <th>timepoint</th>
+      <th>event</th>
+      <th>region</th>
+      <th>signal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>s13</td>
+      <td>18</td>
+      <td>stim</td>
+      <td>parietal</td>
+      <td>-0.017552</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>s5</td>
+      <td>14</td>
+      <td>stim</td>
+      <td>parietal</td>
+      <td>-0.080883</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>s12</td>
+      <td>18</td>
+      <td>stim</td>
+      <td>parietal</td>
+      <td>-0.081033</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>s11</td>
+      <td>18</td>
+      <td>stim</td>
+      <td>parietal</td>
+      <td>-0.046134</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>s10</td>
+      <td>18</td>
+      <td>stim</td>
+      <td>parietal</td>
+      <td>-0.037970</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the responses for different events and regions</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;timepoint&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;signal&quot;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;region&quot;</span><span class="p">,</span>
+    <span class="n">style</span><span class="o">=</span><span class="s2">&quot;event&quot;</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">fmri</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;timepoint&#39;, ylabel=&#39;signal&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/43be3d5321405a5ceebc8d030630d5a98b326b82b49f2e7d08131ea9e6a1c720.png" src="../_images/43be3d5321405a5ceebc8d030630d5a98b326b82b49f2e7d08131ea9e6a1c720.png" />
+</div>
+</div>
+</section>
+<section id="id3">
+<h3>Bar Plot<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chest_pain_type_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;typical angina&quot;</span><span class="p">,</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;atypical angina&quot;</span><span class="p">,</span>
+    <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;non-anginal pain&quot;</span><span class="p">,</span>
+    <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;asymptomatic&quot;</span>
+<span class="p">}</span>
+
+<span class="n">heart_df</span> <span class="o">=</span> <span class="n">heart_df</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">chest_pain</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;cp&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">chest_pain_type_dict</span><span class="p">))</span>
+<span class="n">heart_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>sex</th>
+      <th>cp</th>
+      <th>trestbps</th>
+      <th>chol</th>
+      <th>fbs</th>
+      <th>restecg</th>
+      <th>thalach</th>
+      <th>exang</th>
+      <th>oldpeak</th>
+      <th>slope</th>
+      <th>ca</th>
+      <th>thal</th>
+      <th>num</th>
+      <th>chest_pain</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>63.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>145.0</td>
+      <td>233.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>150.0</td>
+      <td>0.0</td>
+      <td>2.3</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>6.0</td>
+      <td>0</td>
+      <td>typical angina</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>67.0</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>160.0</td>
+      <td>286.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>108.0</td>
+      <td>1.0</td>
+      <td>1.5</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>3.0</td>
+      <td>2</td>
+      <td>asymptomatic</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>67.0</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>120.0</td>
+      <td>229.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>129.0</td>
+      <td>1.0</td>
+      <td>2.6</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>7.0</td>
+      <td>1</td>
+      <td>asymptomatic</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>37.0</td>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>130.0</td>
+      <td>250.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>187.0</td>
+      <td>0.0</td>
+      <td>3.5</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>0</td>
+      <td>non-anginal pain</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>41.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>130.0</td>
+      <td>204.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>172.0</td>
+      <td>0.0</td>
+      <td>1.4</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>0</td>
+      <td>atypical angina</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">heart_df</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;chest_pain&quot;</span><span class="p">,</span>
+    <span class="n">estimator</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span>
+    <span class="c1"># hue=&quot;sex&quot;,</span>
+    <span class="c1"># alpha=.6</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/699f593f8315fbc121bfeadab37c795806ee088ee934391ffedf6c65f82fb1cd.png" src="../_images/699f593f8315fbc121bfeadab37c795806ee088ee934391ffedf6c65f82fb1cd.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">heart_df</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;chest_pain&quot;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span>
+    <span class="n">estimator</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/fb93f9c8f49f2c90989ac0100230da373da6c526f06a937d7d4285fb2277124b.png" src="../_images/fb93f9c8f49f2c90989ac0100230da373da6c526f06a937d7d4285fb2277124b.png" />
+</div>
+</div>
+</section>
+<section id="histogram">
+<h3>Histogram<a class="headerlink" href="#histogram" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">heart_df</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/753f23dbfbc229f64bea2fb8d6b9a83e25c1746c4570a7e5c5320eb5d5dba47d.png" src="../_images/753f23dbfbc229f64bea2fb8d6b9a83e25c1746c4570a7e5c5320eb5d5dba47d.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">heart_df</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span>
+    <span class="n">kde</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/fd0b99e214e875b11e86e874ed43340e3d75578f6625bdeb635d6f7f54439946.png" src="../_images/fd0b99e214e875b11e86e874ed43340e3d75578f6625bdeb635d6f7f54439946.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">heart_df</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4918889f1fb87fdf0d6e50bc388fbc31a8561fe06d232f1b1ee8a9051b6b654e.png" src="../_images/4918889f1fb87fdf0d6e50bc388fbc31a8561fe06d232f1b1ee8a9051b6b654e.png" />
+</div>
+</div>
+</section>
+<section id="box-plot">
+<h3>Box Plot<a class="headerlink" href="#box-plot" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">heart_df</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;chest_pain&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/25a0d831bde40e337d4b0f92fb2cbb9432bc3ad44e199d62404ba40aad2cdad9.png" src="../_images/25a0d831bde40e337d4b0f92fb2cbb9432bc3ad44e199d62404ba40aad2cdad9.png" />
+</div>
+</div>
+</section>
+<section id="heat-map">
+<h3>Heat Map<a class="headerlink" href="#heat-map" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tmp_data</span> <span class="o">=</span> <span class="n">heart_df</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
+    <span class="n">index</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span>
+    <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;chest_pain&quot;</span><span class="p">,</span>
+    <span class="n">values</span><span class="o">=</span><span class="s2">&quot;trestbps&quot;</span><span class="p">,</span>
+
+<span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">tmp_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/0c038887f70f1b21b1ad86c8414e499f3c920b3c4721c698d8a52460718c57a7.png" src="../_images/0c038887f70f1b21b1ad86c8414e499f3c920b3c4721c698d8a52460718c57a7.png" />
+</div>
+</div>
+<p>Seaborn is a nice library for Declarative Visualization, as you noticed the inputs are data and then you only need to declare how that data will be used. For example Seaborn computed all the mean values for us.</p>
+<p>More examples here: <a class="reference external" href="https://seaborn.pydata.org/examples/index.html">https://seaborn.pydata.org/examples/index.html</a></p>
+</section>
 </section>
 </section>
 
@@ -510,8 +1280,21 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-plots">Why plots?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theory">Theory</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib">Matplotlib</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seaborn">Seaborn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib">Matplotlib</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot">Scatter Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#line-plot">Line Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bar-plot">Bar plot</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seaborn">Seaborn</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Scatter Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Line Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Bar Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram">Histogram</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#box-plot">Box Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heat-map">Heat Map</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
