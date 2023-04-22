@@ -3,10 +3,10 @@
 Author: [Alonso G. Ogueda-Oliva](https://aoguedao.github.io/).
 
 
-You can [view this text online][ghpages] or [view the source][source].
+You can [view this text online][ghpages] or [the source code][source].
 
 [ghpages]: https://aoguedao.github.io/gmu-casbbi-nrt
-[source]: https://github.com/aoguedao/gmu-casbbi-nrt 
+[source]: https://github.com/aoguedao/gmu-casbbi-nrt
 
 
 ```{tableofcontents}
