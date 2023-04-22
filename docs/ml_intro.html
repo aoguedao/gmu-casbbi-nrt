@@ -710,48 +710,6 @@ Name: target, Length: 442, dtype: float64
 </div>
 </div>
 </div>
-<p>First 10 columns are numeric predictive values</p>
-<p>Column 11 is a quantitative measure of disease progression one year after baseline</p>
-<table class="colwidths-auto table">
-<thead>
-<tr class="row-odd"><th class="text-left head"><p>Feature</p></th>
-<th class="text-center head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-left"><p>age</p></td>
-<td class="text-center"><p>age in years</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>sex</p></td>
-<td class="text-center"><p>sex</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p>bmi</p></td>
-<td class="text-center"><p>body mass index</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>bp</p></td>
-<td class="text-center"><p>average blood pressure</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p>s1</p></td>
-<td class="text-center"><p>tc, T-Cells (a type of white blood cells)</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>s2</p></td>
-<td class="text-center"><p>ldl, low-density lipoproteins</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p>s3</p></td>
-<td class="text-center"><p>hdl, high-density lipoproteins</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>s4</p></td>
-<td class="text-center"><p>tch, thyroid stimulating hormone</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p>s5</p></td>
-<td class="text-center"><p>ltg, lamotrigine</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>s6</p></td>
-<td class="text-center"><p>glu, blood sugar level</p></td>
-</tr>
-</tbody>
-</table>
-<p>Note: Each of these 10 feature variables have been mean centered and scaled by the standard deviation times the square root of n_samples (i.e. the sum of squares of each column totals 1).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
