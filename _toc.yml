@@ -21,3 +21,4 @@ parts:
     - file: labs/lab_python_101
     - file: labs/lab_data_analysis
     - file: labs/lab_data_visualization
+    - file: labs/lab_ml_intro
