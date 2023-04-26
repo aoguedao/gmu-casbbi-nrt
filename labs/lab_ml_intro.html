@@ -1,0 +1,1242 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Activity - Machine Learning - Introduction &#8212; GMU CASBBI NRT Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'labs/lab_ml_intro';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Activity - Data Visualization" href="lab_data_visualization.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../docs/index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/GMU_PLogo_4CP.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/GMU_PLogo_4CP.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../docs/index.html">
+                    GMU CASBBI NRT Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lessons</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../docs/ds_toolkit.html">Data Science Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/python_101.html">Python 101</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/data_analysis.html">Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/data_visualization.html">Data Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/ml_intro.html">Machine Learning - Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/ml_model_selection.html">Machine Learning - Model Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/ml_gradient_descent.html">Machine Learning - Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/ml_non_parametric.html">Machine Learning - Non-Parametric Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/data_ethics.html">Data Ethics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Activities</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lab_ds_toolkit.html">Activity - Data Science Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab_python_101.html">Activity - Python 101</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab_data_analysis.html">Activity - Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab_data_visualization.html">Activity - Data Visualization</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Activity - Machine Learning - Introduction</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aoguedao/gmu-casbbi-nrt/blob/main/labs/lab_ml_intro.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aoguedao/gmu-casbbi-nrt" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aoguedao/gmu-casbbi-nrt/issues/new?title=Issue%20on%20page%20%2Flabs/lab_ml_intro.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/labs/lab_ml_intro.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Activity - Machine Learning - Introduction</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-0-explore-the-data">Step 0: Explore the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-prepare-your-data">Step 1: Prepare your data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-1-select-a-drug">Step 1.1: Select a drug</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-2-select-attributes">Step 1.2: Select attributes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-select-your-classification-model">Step 2: Select your classification model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-train-your-model">Step 3: Train your model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-evaluate-your-model">Step 4: Evaluate your model</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="activity-machine-learning-introduction">
+<h1>Activity - Machine Learning - Introduction<a class="headerlink" href="#activity-machine-learning-introduction" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this activity you will try to classify the drug consumption using personal variables. Please work collaboratively, discuss your ideas and finally we will share results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;https://archive.ics.uci.edu/ml/machine-learning-databases/00373/drug_consumption.data&quot;</span><span class="p">,</span>
+    <span class="n">names</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;age&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gender&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;education&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;country&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ethnicity&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;nscore&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;escore&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;oscore&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ascore&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;cscore&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;impulsive&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ss&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;alcohol&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;amphet&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;amyl&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;benzos&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;caff&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;cannabis&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;choc&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;coke&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;crack&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ecstasy&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;heroin&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ketamine&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;legalh&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;lsd&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;meth&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mushrooms&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;nicotine&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;semer&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vsa&quot;</span>
+    <span class="p">],</span>
+    <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+<span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>gender</th>
+      <th>education</th>
+      <th>country</th>
+      <th>ethnicity</th>
+      <th>nscore</th>
+      <th>escore</th>
+      <th>oscore</th>
+      <th>ascore</th>
+      <th>cscore</th>
+      <th>...</th>
+      <th>ecstasy</th>
+      <th>heroin</th>
+      <th>ketamine</th>
+      <th>legalh</th>
+      <th>lsd</th>
+      <th>meth</th>
+      <th>mushrooms</th>
+      <th>nicotine</th>
+      <th>semer</th>
+      <th>vsa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0.49788</td>
+      <td>0.48246</td>
+      <td>-0.05921</td>
+      <td>0.96082</td>
+      <td>0.12600</td>
+      <td>0.31287</td>
+      <td>-0.57545</td>
+      <td>-0.58331</td>
+      <td>-0.91699</td>
+      <td>-0.00665</td>
+      <td>...</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL2</td>
+      <td>CL0</td>
+      <td>CL0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.07854</td>
+      <td>-0.48246</td>
+      <td>1.98437</td>
+      <td>0.96082</td>
+      <td>-0.31685</td>
+      <td>-0.67825</td>
+      <td>1.93886</td>
+      <td>1.43533</td>
+      <td>0.76096</td>
+      <td>-0.14277</td>
+      <td>...</td>
+      <td>CL4</td>
+      <td>CL0</td>
+      <td>CL2</td>
+      <td>CL0</td>
+      <td>CL2</td>
+      <td>CL3</td>
+      <td>CL0</td>
+      <td>CL4</td>
+      <td>CL0</td>
+      <td>CL0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.49788</td>
+      <td>-0.48246</td>
+      <td>-0.05921</td>
+      <td>0.96082</td>
+      <td>-0.31685</td>
+      <td>-0.46725</td>
+      <td>0.80523</td>
+      <td>-0.84732</td>
+      <td>-1.62090</td>
+      <td>-1.01450</td>
+      <td>...</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL1</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-0.95197</td>
+      <td>0.48246</td>
+      <td>1.16365</td>
+      <td>0.96082</td>
+      <td>-0.31685</td>
+      <td>-0.14882</td>
+      <td>-0.80615</td>
+      <td>-0.01928</td>
+      <td>0.59042</td>
+      <td>0.58489</td>
+      <td>...</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL2</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL2</td>
+      <td>CL0</td>
+      <td>CL0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.49788</td>
+      <td>0.48246</td>
+      <td>1.98437</td>
+      <td>0.96082</td>
+      <td>-0.31685</td>
+      <td>0.73545</td>
+      <td>-1.63340</td>
+      <td>-0.45174</td>
+      <td>-0.30172</td>
+      <td>1.30612</td>
+      <td>...</td>
+      <td>CL1</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL1</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL2</td>
+      <td>CL2</td>
+      <td>CL0</td>
+      <td>CL0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1884</th>
+      <td>-0.95197</td>
+      <td>0.48246</td>
+      <td>-0.61113</td>
+      <td>-0.57009</td>
+      <td>-0.31685</td>
+      <td>-1.19430</td>
+      <td>1.74091</td>
+      <td>1.88511</td>
+      <td>0.76096</td>
+      <td>-1.13788</td>
+      <td>...</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL3</td>
+      <td>CL3</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL5</td>
+    </tr>
+    <tr>
+      <th>1885</th>
+      <td>-0.95197</td>
+      <td>-0.48246</td>
+      <td>-0.61113</td>
+      <td>-0.57009</td>
+      <td>-0.31685</td>
+      <td>-0.24649</td>
+      <td>1.74091</td>
+      <td>0.58331</td>
+      <td>0.76096</td>
+      <td>-1.51840</td>
+      <td>...</td>
+      <td>CL2</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL3</td>
+      <td>CL5</td>
+      <td>CL4</td>
+      <td>CL4</td>
+      <td>CL5</td>
+      <td>CL0</td>
+      <td>CL0</td>
+    </tr>
+    <tr>
+      <th>1886</th>
+      <td>-0.07854</td>
+      <td>0.48246</td>
+      <td>0.45468</td>
+      <td>-0.57009</td>
+      <td>-0.31685</td>
+      <td>1.13281</td>
+      <td>-1.37639</td>
+      <td>-1.27553</td>
+      <td>-1.77200</td>
+      <td>-1.38502</td>
+      <td>...</td>
+      <td>CL4</td>
+      <td>CL0</td>
+      <td>CL2</td>
+      <td>CL0</td>
+      <td>CL2</td>
+      <td>CL0</td>
+      <td>CL2</td>
+      <td>CL6</td>
+      <td>CL0</td>
+      <td>CL0</td>
+    </tr>
+    <tr>
+      <th>1887</th>
+      <td>-0.95197</td>
+      <td>0.48246</td>
+      <td>-0.61113</td>
+      <td>-0.57009</td>
+      <td>-0.31685</td>
+      <td>0.91093</td>
+      <td>-1.92173</td>
+      <td>0.29338</td>
+      <td>-1.62090</td>
+      <td>-2.57309</td>
+      <td>...</td>
+      <td>CL3</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL3</td>
+      <td>CL3</td>
+      <td>CL0</td>
+      <td>CL3</td>
+      <td>CL4</td>
+      <td>CL0</td>
+      <td>CL0</td>
+    </tr>
+    <tr>
+      <th>1888</th>
+      <td>-0.95197</td>
+      <td>-0.48246</td>
+      <td>-0.61113</td>
+      <td>0.21128</td>
+      <td>-0.31685</td>
+      <td>-0.46725</td>
+      <td>2.12700</td>
+      <td>1.65653</td>
+      <td>1.11406</td>
+      <td>0.41594</td>
+      <td>...</td>
+      <td>CL3</td>
+      <td>CL0</td>
+      <td>CL0</td>
+      <td>CL3</td>
+      <td>CL3</td>
+      <td>CL0</td>
+      <td>CL3</td>
+      <td>CL6</td>
+      <td>CL0</td>
+      <td>CL2</td>
+    </tr>
+  </tbody>
+</table>
+<p>1885 rows × 31 columns</p>
+</div></div></div>
+</div>
+<section id="step-0-explore-the-data">
+<h2>Step 0: Explore the data<a class="headerlink" href="#step-0-explore-the-data" title="Permalink to this headline">#</a></h2>
+<p>Please read the description of the data and its variables in the following link: <a class="reference external" href="https://archive-beta.ics.uci.edu/dataset/373/drug+consumption+quantified">https://archive-beta.ics.uci.edu/dataset/373/drug+consumption+quantified</a></p>
+<p>Feel free to do some descriptive statistics but don’t spend more than 5 minutes.</p>
+</section>
+<section id="step-1-prepare-your-data">
+<h2>Step 1: Prepare your data<a class="headerlink" href="#step-1-prepare-your-data" title="Permalink to this headline">#</a></h2>
+<section id="step-1-1-select-a-drug">
+<h3>Step 1.1: Select a drug<a class="headerlink" href="#step-1-1-select-a-drug" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;nicotine&quot;</span><span class="p">]</span>  <span class="c1"># Change it for the drug you want to classify</span>
+<span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1       CL2
+2       CL4
+3       CL0
+4       CL2
+5       CL2
+       ... 
+1884    CL0
+1885    CL5
+1886    CL6
+1887    CL4
+1888    CL6
+Name: nicotine, Length: 1885, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-1-2-select-attributes">
+<h3>Step 1.2: Select attributes<a class="headerlink" href="#step-1-2-select-attributes" title="Permalink to this headline">#</a></h3>
+<p>Feel free to erase any variable you think should not be consider for your machine learning algorithm.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+    <span class="p">:,</span>
+    <span class="p">[</span>
+        <span class="s2">&quot;age&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gender&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;education&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;country&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ethnicity&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;nscore&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;escore&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;oscore&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ascore&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;cscore&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;impulsive&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ss&quot;</span>
+    <span class="p">]</span>
+<span class="p">]</span>
+<span class="n">X</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>gender</th>
+      <th>education</th>
+      <th>country</th>
+      <th>ethnicity</th>
+      <th>nscore</th>
+      <th>escore</th>
+      <th>oscore</th>
+      <th>ascore</th>
+      <th>cscore</th>
+      <th>impulsive</th>
+      <th>ss</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0.49788</td>
+      <td>0.48246</td>
+      <td>-0.05921</td>
+      <td>0.96082</td>
+      <td>0.12600</td>
+      <td>0.31287</td>
+      <td>-0.57545</td>
+      <td>-0.58331</td>
+      <td>-0.91699</td>
+      <td>-0.00665</td>
+      <td>-0.21712</td>
+      <td>-1.18084</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.07854</td>
+      <td>-0.48246</td>
+      <td>1.98437</td>
+      <td>0.96082</td>
+      <td>-0.31685</td>
+      <td>-0.67825</td>
+      <td>1.93886</td>
+      <td>1.43533</td>
+      <td>0.76096</td>
+      <td>-0.14277</td>
+      <td>-0.71126</td>
+      <td>-0.21575</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.49788</td>
+      <td>-0.48246</td>
+      <td>-0.05921</td>
+      <td>0.96082</td>
+      <td>-0.31685</td>
+      <td>-0.46725</td>
+      <td>0.80523</td>
+      <td>-0.84732</td>
+      <td>-1.62090</td>
+      <td>-1.01450</td>
+      <td>-1.37983</td>
+      <td>0.40148</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-0.95197</td>
+      <td>0.48246</td>
+      <td>1.16365</td>
+      <td>0.96082</td>
+      <td>-0.31685</td>
+      <td>-0.14882</td>
+      <td>-0.80615</td>
+      <td>-0.01928</td>
+      <td>0.59042</td>
+      <td>0.58489</td>
+      <td>-1.37983</td>
+      <td>-1.18084</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.49788</td>
+      <td>0.48246</td>
+      <td>1.98437</td>
+      <td>0.96082</td>
+      <td>-0.31685</td>
+      <td>0.73545</td>
+      <td>-1.63340</td>
+      <td>-0.45174</td>
+      <td>-0.30172</td>
+      <td>1.30612</td>
+      <td>-0.21712</td>
+      <td>-0.21575</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1884</th>
+      <td>-0.95197</td>
+      <td>0.48246</td>
+      <td>-0.61113</td>
+      <td>-0.57009</td>
+      <td>-0.31685</td>
+      <td>-1.19430</td>
+      <td>1.74091</td>
+      <td>1.88511</td>
+      <td>0.76096</td>
+      <td>-1.13788</td>
+      <td>0.88113</td>
+      <td>1.92173</td>
+    </tr>
+    <tr>
+      <th>1885</th>
+      <td>-0.95197</td>
+      <td>-0.48246</td>
+      <td>-0.61113</td>
+      <td>-0.57009</td>
+      <td>-0.31685</td>
+      <td>-0.24649</td>
+      <td>1.74091</td>
+      <td>0.58331</td>
+      <td>0.76096</td>
+      <td>-1.51840</td>
+      <td>0.88113</td>
+      <td>0.76540</td>
+    </tr>
+    <tr>
+      <th>1886</th>
+      <td>-0.07854</td>
+      <td>0.48246</td>
+      <td>0.45468</td>
+      <td>-0.57009</td>
+      <td>-0.31685</td>
+      <td>1.13281</td>
+      <td>-1.37639</td>
+      <td>-1.27553</td>
+      <td>-1.77200</td>
+      <td>-1.38502</td>
+      <td>0.52975</td>
+      <td>-0.52593</td>
+    </tr>
+    <tr>
+      <th>1887</th>
+      <td>-0.95197</td>
+      <td>0.48246</td>
+      <td>-0.61113</td>
+      <td>-0.57009</td>
+      <td>-0.31685</td>
+      <td>0.91093</td>
+      <td>-1.92173</td>
+      <td>0.29338</td>
+      <td>-1.62090</td>
+      <td>-2.57309</td>
+      <td>1.29221</td>
+      <td>1.22470</td>
+    </tr>
+    <tr>
+      <th>1888</th>
+      <td>-0.95197</td>
+      <td>-0.48246</td>
+      <td>-0.61113</td>
+      <td>0.21128</td>
+      <td>-0.31685</td>
+      <td>-0.46725</td>
+      <td>2.12700</td>
+      <td>1.65653</td>
+      <td>1.11406</td>
+      <td>0.41594</td>
+      <td>0.88113</td>
+      <td>1.22470</td>
+    </tr>
+  </tbody>
+</table>
+<p>1885 rows × 12 columns</p>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="step-2-select-your-classification-model">
+<h2>Step 2: Select your classification model<a class="headerlink" href="#step-2-select-your-classification-model" title="Permalink to this headline">#</a></h2>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span><span class="c1">#FIX ME#</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="kn">from</span> <span class="nn">sklearn</span><span class="c1">#FIX ME#</span>
+                <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="c1">#FIX ME#</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="c1">#FIX ME#</span>
+            <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-train-your-model">
+<h2>Step 3: Train your model<a class="headerlink" href="#step-3-train-your-model" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="c1">#FIX ME#)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="c1">#FIX ME#)</span>
+                       <span class="o">^</span>
+<span class="ne">SyntaxError</span>: incomplete input
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-evaluate-your-model">
+<h2>Step 4: Evaluate your model<a class="headerlink" href="#step-4-evaluate-your-model" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">ConfusionMatrixDisplay</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ConfusionMatrixDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sklearn.metrics._plot.confusion_matrix.ConfusionMatrixDisplay at 0x7fe74230bc40&gt;
+</pre></div>
+</div>
+<img alt="../_images/97bd586b313ab00f023758bcc9e0f027fe165d5dcdb7fec82f9ed498073d8a71.png" src="../_images/97bd586b313ab00f023758bcc9e0f027fe165d5dcdb7fec82f9ed498073d8a71.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./labs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="lab_data_visualization.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Activity - Data Visualization</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-0-explore-the-data">Step 0: Explore the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-prepare-your-data">Step 1: Prepare your data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-1-select-a-drug">Step 1.1: Select a drug</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-2-select-attributes">Step 1.2: Select attributes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-select-your-classification-model">Step 2: Select your classification model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-train-your-model">Step 3: Train your model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-evaluate-your-model">Step 4: Evaluate your model</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner">
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alonso G. Ogueda-Oliva
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div></div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
