@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Machine Learning Modeling &#8212; GMU CASBBI NRT Data Science</title>
+    <title>ML - Modeling &#8212; GMU CASBBI NRT Data Science</title>
   
   
   
@@ -169,7 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Topics</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Machine Learning Modeling</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">ML - Modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ml_classification.html">ML - Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ml_clustering.html">ML - Clustering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_ethics.html">Data Ethics</a></li>
@@ -395,7 +395,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Machine Learning Modeling</h1>
+    <h1>ML - Modeling</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -437,8 +437,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="machine-learning-modeling">
-<h1>Machine Learning Modeling<a class="headerlink" href="#machine-learning-modeling" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="ml-modeling">
+<h1>ML - Modeling<a class="headerlink" href="#ml-modeling" title="Permalink to this headline">#</a></h1>
 <section id="motivation">
 <h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
@@ -616,12 +616,13 @@ Here \)</span>f<span class="math notranslate nohighlight">\( is some fixed but u
 </section>
 <section id="prediction">
 <h2>Prediction<a class="headerlink" href="#prediction" title="Permalink to this headline">#</a></h2>
-<p>In many situations, a set of inputs <span class="math notranslate nohighlight">\(X\)</span> are readily available, but the output <span class="math notranslate nohighlight">\(y\)</span> cannot be easily obtained. In this setting, since the error term averages to zero, we can predict <span class="math notranslate nohighlight">\(y\)</span> using
-$<span class="math notranslate nohighlight">\(
+<p>In many situations, a set of inputs <span class="math notranslate nohighlight">\(X\)</span> are readily available, but the output <span class="math notranslate nohighlight">\(y\)</span> cannot be easily obtained. In this setting, since the error term averages to zero, we can predict <span class="math notranslate nohighlight">\(y\)</span> using</p>
+<div class="math notranslate nohighlight">
+\[
 \hat{y} = \hat{f}(X),
-\)</span><span class="math notranslate nohighlight">\(
-where \)</span>\hat{f}<span class="math notranslate nohighlight">\( represents our estimate for \)</span>f<span class="math notranslate nohighlight">\(, and \)</span>\hat{y}<span class="math notranslate nohighlight">\( represents the resulting prediction for \)</span>Y<span class="math notranslate nohighlight">\( . In this setting, \)</span>\hat{f}<span class="math notranslate nohighlight">\( is often treated as a __black-box__, in the sense
-that one is not typically concerned with the exact form of \)</span>\hat{f}<span class="math notranslate nohighlight">\(, provided that it yields accurate predictions for \)</span>y$.</p>
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hat{f}\)</span> represents our estimate for <span class="math notranslate nohighlight">\(f\)</span>, and <span class="math notranslate nohighlight">\(\hat{y}\)</span> represents the resulting prediction for <span class="math notranslate nohighlight">\(Y\)</span> . In this setting, <span class="math notranslate nohighlight">\(\hat{f}\)</span> is often treated as a <strong>black-box</strong>, in the sense
+that one is not typically concerned with the exact form of <span class="math notranslate nohighlight">\(\hat{f}\)</span>, provided that it yields accurate predictions for <span class="math notranslate nohighlight">\(y\)</span>.</p>
 </section>
 <section id="estimation">
 <h2>Estimation<a class="headerlink" href="#estimation" title="Permalink to this headline">#</a></h2>
