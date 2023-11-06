@@ -162,9 +162,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../docs/data_analysis.html">Data Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/data_visualization.html">Data Visualization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/ml_intro.html">Machine Learning - Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../docs/ml_model_selection.html">Machine Learning - Model Selection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../docs/ml_gradient_descent.html">Machine Learning - Gradient Descent</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../docs/ml_non_parametric.html">Machine Learning - Non-Parametric Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/ml_validation.html">ML - Model Validation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../docs/ml_modeling.html">Machine Learning Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/ml_classification.html">ML - Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/ml_clustering.html">ML - Clustering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/data_ethics.html">Data Ethics</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Activities</span></p>
@@ -407,6 +411,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-select-your-classification-model">Step 2: Select your classification model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-train-your-model">Step 3: Train your model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-evaluate-your-model">Step 4: Evaluate your model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-train-test">Optional: Train test</a></li>
 </ul>
             </nav>
         </div>
@@ -1115,11 +1120,25 @@ Name: nicotine, Length: 1885, dtype: object
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sklearn.metrics._plot.confusion_matrix.ConfusionMatrixDisplay at 0x7fe74230bc40&gt;
+</div>
+</section>
+<section id="optional-train-test">
+<h2>Optional: Train test<a class="headerlink" href="#optional-train-test" title="Permalink to this headline">#</a></h2>
+<p>Train your model with training data and compute the score using the test dataset. Feel free to do some hyper-optimization as well.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/97bd586b313ab00f023758bcc9e0f027fe165d5dcdb7fec82f9ed498073d8a71.png" src="../_images/97bd586b313ab00f023758bcc9e0f027fe165d5dcdb7fec82f9ed498073d8a71.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># YOU CAN DO IT #</span>
+</pre></div>
+</div>
 </div>
 </div>
 </section>
@@ -1186,6 +1205,7 @@ Name: nicotine, Length: 1885, dtype: object
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-select-your-classification-model">Step 2: Select your classification model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-train-your-model">Step 3: Train your model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-evaluate-your-model">Step 4: Evaluate your model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-train-test">Optional: Train test</a></li>
 </ul>
   </nav></div>
 
