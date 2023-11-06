@@ -11,9 +11,12 @@ parts:
     - file: docs/data_analysis
     - file: docs/data_visualization
     - file: docs/ml_intro
-    - file: docs/ml_model_selection
-    - file: docs/ml_gradient_descent
-    - file: docs/ml_non_parametric
+    - file: docs/ml_validation
+  - caption: Advanced Topics
+    - file: docs/ml_modeling
+    - file: docs/ml_regression
+    - file: docs/ml_classification
+    - file: docs/ml_clustering
     - file: docs/data_ethics
   - caption: Activities
     chapters:
